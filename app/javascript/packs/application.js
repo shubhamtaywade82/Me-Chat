@@ -20,11 +20,20 @@ scroll_bottom = function () {
     $("#messages").scrollTop($("#messages")[0].scrollHeight);
   }
 };
-
+submit_message = function () {
+  $("#message_body").on("keydown", function (event) {
+    if (event.keyCode == 13) {
+      $("button").click();
+      event.target.value = "";
+      event.preventDefault();
+    }
+  });
+};
 $(document).on("turbolinks:load", function () {
   $(".ui.dropdown").dropdown();
   $(".message .close").on("click", function () {
     $(this).closest(".message").transition("fade");
   });
+  submit_message();
   scroll_bottom();
 });
